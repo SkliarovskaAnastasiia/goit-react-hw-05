@@ -1,0 +1,28 @@
+.header {
+  background-color: #fafafa;
+  padding: 10px;
+  margin-bottom: 32px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.navLink {
+  padding: 8px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: border-color 0.3s ease-in, background-color 0.3s ease-in,
+    color 0.3s ease-in;
+}
+.navLink:hover,
+.navLink:focus {
+  border-color: #747bff;
+}
+.navLink.activeLink {
+  background-color: #747bff;
+  color: #ffffff;
+}
