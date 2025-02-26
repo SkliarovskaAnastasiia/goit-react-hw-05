@@ -19,7 +19,7 @@ export default function HomePage() {
   return (
     <>
       <h2 className="homePageTitle">Trending Today</h2>
-      <MovieList movies={trendingMovies} />;
+      <MovieList movies={trendingMovies} />
     </>
   );
 }

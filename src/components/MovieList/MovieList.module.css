@@ -11,6 +11,7 @@
   border-radius: 6px;
   padding-bottom: 4px;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  overflow: hidden;
 }
 
 .movieLink {
@@ -20,6 +21,7 @@
 .poster {
   border-radius: 8px 8px 0 0;
   margin-bottom: 4px;
+  transition: scale 0.25s ease-in;
 }
 
 .movieTitle {
@@ -27,11 +29,6 @@
   font-weight: 500;
   text-align: center;
   transition: color 0.25s ease-in;
-}
-
-.movieListItem:hover .movieTitle,
-.movieListItem:focus .movieTitle {
-  color: #747bff;
 }
 
 .movieYear {
@@ -42,6 +39,16 @@
 @media screen and (min-width: 768px) {
   .movieListItem {
     width: calc((100% - 54px) / 4);
+  }
+
+  .movieListItem:hover .movieTitle,
+  .movieListItem:focus .movieTitle {
+    color: #747bff;
+  }
+
+  .movieListItem:hover .poster,
+  .movieListItem:focus .poster {
+    scale: 1.01;
   }
 }
 

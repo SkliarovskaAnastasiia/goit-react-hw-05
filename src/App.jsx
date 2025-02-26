@@ -8,7 +8,9 @@ import './App.css';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const MoviesPage = lazy(() => import('./pages/MoviesPage'));
-const MovieDetailsPage = lazy(() => import('./pages/MovieDetailsPage'));
+const MovieDetailsPage = lazy(() =>
+  import('./pages/MovieDetailsPage/MovieDetailsPage')
+);
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const MovieCast = lazy(() => import('./components/MovieCast'));
 const MovieReviews = lazy(() => import('./components/MovieReviews'));
