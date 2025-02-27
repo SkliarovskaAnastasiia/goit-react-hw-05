@@ -11,3 +11,8 @@
   margin-bottom: 24px;
   position: relative;
 }
+
+.noReviews {
+  text-align: center;
+  margin-bottom: 10px;
+}

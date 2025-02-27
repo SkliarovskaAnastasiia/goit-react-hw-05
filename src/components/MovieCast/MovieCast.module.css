@@ -1,0 +1,26 @@
+.actorsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  padding: 32px 0;
+  margin: 0 auto;
+}
+
+.actorsItem {
+  width: calc((100% - 18px) / 2);
+  border-radius: 6px;
+  padding-bottom: 6px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}
+
+@media screen and (min-width: 768px) {
+  .actorsItem {
+    width: calc((100% - 54px) / 4);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .actorsItem {
+    width: calc((100% - 72px) / 5);
+  }
+}

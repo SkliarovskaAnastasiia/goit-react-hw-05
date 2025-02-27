@@ -12,7 +12,7 @@ import { formatDateToYear } from '../../helpers/formatDateToYear';
 import { formatRuntime } from '../../helpers/formatRuntime';
 import clsx from 'clsx';
 import css from './MovieDetailsPage.module.css';
-import Loader from '../../components/Loader';
+import Loader from '../../components/Loader/Loader';
 
 function addClasses({ isActive }) {
   return clsx(css.itemLink, isActive && css.activeLink);
@@ -23,6 +23,7 @@ export default function MovieDetailsPage() {
   const [movieData, setMovieData] = useState({});
   const imgUrl = 'https://image.tmdb.org/t/p/w500/';
   const location = useLocation();
+  const backlink = location.state?.pathname || '/movies';
 
   useEffect(() => {
     (async () => {
@@ -37,7 +38,7 @@ export default function MovieDetailsPage() {
 
   return (
     <div className="container">
-      <Link to={location.state ?? '/movies'} className={css.backBtn}>
+      <Link to={backlink} className={css.backBtn}>
         <IoIosArrowRoundBack size={24} className={css.backIcon} /> Go back
       </Link>
       <div className={css.detailsWrapper}>
@@ -82,12 +83,12 @@ export default function MovieDetailsPage() {
       </div>
       <ul className={css.additionalList}>
         <li>
-          <NavLink to="reviews" className={addClasses}>
+          <NavLink to="reviews" state={location.state} className={addClasses}>
             Reviews
           </NavLink>
         </li>
         <li>
-          <NavLink to="cast" className={addClasses}>
+          <NavLink to="cast" state={location.state} className={addClasses}>
             Cast
           </NavLink>
         </li>

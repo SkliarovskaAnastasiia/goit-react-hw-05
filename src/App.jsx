@@ -3,16 +3,16 @@ import { Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import Navigation from './components/Navigation/Navigation';
 import Footer from './components/Footer/Footer';
-import Loader from './components/Loader';
+import Loader from './components/Loader/Loader';
 import './App.css';
 
-const HomePage = lazy(() => import('./pages/HomePage'));
-const MoviesPage = lazy(() => import('./pages/MoviesPage'));
+const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
+const MoviesPage = lazy(() => import('./pages/MoviePage/MoviesPage'));
 const MovieDetailsPage = lazy(() =>
   import('./pages/MovieDetailsPage/MovieDetailsPage')
 );
-const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
-const MovieCast = lazy(() => import('./components/MovieCast'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
+const MovieCast = lazy(() => import('./components/MovieCast/MovieCast'));
 const MovieReviews = lazy(() =>
   import('./components/MovieReviews/MovieReviews')
 );

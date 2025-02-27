@@ -21,7 +21,7 @@ export default function MovieReviews() {
 
   return (
     <>
-      {reviews.length > 0 ? (
+      {reviews?.length > 0 ? (
         <ul className={css.reviewslist}>
           {reviews.map(review => (
             <li key={review.id} className={css.reviewItem}>
@@ -30,7 +30,9 @@ export default function MovieReviews() {
           ))}
         </ul>
       ) : (
-        <p>We dont&apos;n have any reviews for this movie</p>
+        <p className={css.noReviews}>
+          We dont&apos;n have any reviews for this movie
+        </p>
       )}
     </>
   );
