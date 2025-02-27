@@ -1,0 +1,87 @@
+.username {
+  position: absolute;
+  top: -10px;
+  left: 0px;
+  background-color: #fafafa;
+  border: 1px solid #747bff;
+  border-radius: 8px;
+  padding: 4px;
+  color: #747bff;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.reviewContent {
+  --max-lines: 3;
+  --line-height: 1.5;
+
+  max-height: calc(var(--max-lines) * 1em * var(--line-height));
+  line-height: var(--line-height);
+
+  overflow: hidden;
+  margin-bottom: 6px;
+  position: relative;
+}
+
+.reviewContent:has(+ .showMoreBtn:not(:checked))::before {
+  content: '';
+  position: absolute;
+  height: calc(1em * var(--line-height));
+  width: 100%;
+  bottom: 0;
+  pointer-events: none;
+  background-image: linear-gradient(to bottom, transparent, #fafafa);
+}
+
+.showMoreBtn {
+  appearance: none;
+  display: block;
+  margin: 0 auto 6px;
+  cursor: pointer;
+
+  font-size: 14px;
+  color: #747bff;
+
+  transition: transform 0.4s ease-in;
+}
+.showMoreBtn::before {
+  content: 'Show more';
+}
+.showMoreBtn:checked:before {
+  content: 'Hide';
+}
+
+.reviewContent:has(+ .showMoreBtn:checked) {
+  max-height: none;
+}
+.showMoreBtn::after {
+  content: ' ';
+  position: absolute;
+  left: 0;
+  display: block;
+  margin: 0 auto 0 auto;
+  width: 0px;
+  height: 2px;
+  border-radius: 6px;
+  background-color: #747bff;
+
+  transition: width 500ms ease;
+}
+
+.createdDate {
+  font-size: 13px;
+  color: #2a2a2ab6;
+  font-style: italic;
+}
+
+@media screen and (min-width: 768px) {
+  .showMoreBtn:hover,
+  .showMoreBtn:focus {
+    transform: scale(1.1);
+  }
+
+  .showMoreBtn:hover::after,
+  .showMoreBtn:focus::after {
+    width: 100%;
+  }
+}

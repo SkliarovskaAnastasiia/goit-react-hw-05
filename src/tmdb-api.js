@@ -28,9 +28,7 @@ export async function getMovieCast(movieId) {
   return response.data;
 }
 
-export async function getMoviesReviews(movieId, page) {
-  const response = await axios.get(`movie/${movieId}}/reviews`, {
-    params: { page },
-  });
+export async function getMoviesReviews(movieId) {
+  const response = await axios.get(`movie/${movieId}}/reviews`);
   return response.data;
 }

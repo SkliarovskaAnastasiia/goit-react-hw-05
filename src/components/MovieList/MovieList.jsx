@@ -9,21 +9,16 @@ export default function MovieList({ movies }) {
   return (
     <div className="container">
       <ul className={css.moviesList}>
-        {movies.map(movie => (
-          <li key={movie.id} className={css.movieListItem}>
+        {movies.map(({ id, poster_path, title, release_date }) => (
+          <li key={id} className={css.movieListItem}>
             <Link
-              to={`/movies/${movie.id}`}
+              to={`/movies/${id}`}
               state={location}
               className={css.movieLink}
             >
-              <img
-                src={`${imgUrl}${movie.poster_path}`}
-                className={css.poster}
-              />
-              <p className={css.movieTitle}>{movie.title}</p>
-              <p className={css.movieYear}>
-                {formatDateToYear(movie.release_date)}
-              </p>
+              <img src={`${imgUrl}${poster_path}`} className={css.poster} />
+              <p className={css.movieTitle}>{title}</p>
+              <p className={css.movieYear}>{formatDateToYear(release_date)}</p>
             </Link>
           </li>
         ))}

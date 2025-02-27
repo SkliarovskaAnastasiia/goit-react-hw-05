@@ -13,7 +13,9 @@ const MovieDetailsPage = lazy(() =>
 );
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const MovieCast = lazy(() => import('./components/MovieCast'));
-const MovieReviews = lazy(() => import('./components/MovieReviews'));
+const MovieReviews = lazy(() =>
+  import('./components/MovieReviews/MovieReviews')
+);
 
 function App() {
   return (
