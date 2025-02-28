@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
-import css from './MovieList.module.css';
 import { formatDateToYear } from '../../helpers/formatDateToYear';
+import noPosterHolder from '../../assets/noPosterHolder.jpg';
+import css from './MovieList.module.css';
 
 export default function MovieList({ movies }) {
   const imgUrl = 'https://image.tmdb.org/t/p/w500/';
@@ -16,9 +17,16 @@ export default function MovieList({ movies }) {
               state={location}
               className={css.movieLink}
             >
-              <img src={`${imgUrl}${poster_path}`} className={css.poster} />
+              <img
+                src={poster_path ? `${imgUrl}${poster_path}` : noPosterHolder}
+                alt="Movie poster"
+                className={css.poster}
+              />
+
               <p className={css.movieTitle}>{title}</p>
-              <p className={css.movieYear}>{formatDateToYear(release_date)}</p>
+              <p className={css.movieYear}>
+                {release_date ? formatDateToYear(release_date) : 'Unknown'}
+              </p>
             </Link>
           </li>
         ))}

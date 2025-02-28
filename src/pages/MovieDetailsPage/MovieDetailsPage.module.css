@@ -11,61 +11,6 @@
   transition: fill 0.25s ease-in;
 }
 
-.detailsWrapper {
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
-  padding: 16px;
-  border-radius: 8px;
-  margin-bottom: 16px;
-}
-.poster {
-  max-width: 335px;
-  margin: 0 auto 10px;
-}
-
-.movieTitle {
-  text-align: center;
-}
-
-.movieDate {
-  color: #2a2a2ab6;
-  line-height: 1;
-  margin-bottom: 18px;
-  text-align: center;
-}
-
-.movieInfoItem {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 18px;
-  color: #747bff;
-  font-weight: 500;
-}
-
-.text {
-  color: #2a2a2a;
-  font-weight: 400;
-  position: relative;
-}
-
-.textList:not(:last-child)::after {
-  position: absolute;
-  content: ',';
-}
-
-.tagline {
-  font-size: 18px;
-  font-style: italic;
-  color: #2a2a2ab6;
-  position: relative;
-  margin-bottom: 8px;
-}
-
-.overview {
-  font-weight: 500;
-  color: #747bff;
-}
-
 .additionalList {
   display: flex;
   justify-content: center;

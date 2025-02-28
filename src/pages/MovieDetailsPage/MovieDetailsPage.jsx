@@ -8,11 +8,11 @@ import {
   useParams,
 } from 'react-router-dom';
 import { getMovieById } from '../../tmdb-api';
-import { formatDateToYear } from '../../helpers/formatDateToYear';
-import { formatRuntime } from '../../helpers/formatRuntime';
 import clsx from 'clsx';
-import css from './MovieDetailsPage.module.css';
 import Loader from '../../components/Loader/Loader';
+import MovieDetails from '../../components/MovieDetails/MovieDetails';
+import toast from 'react-hot-toast';
+import css from './MovieDetailsPage.module.css';
 
 function addClasses({ isActive }) {
   return clsx(css.itemLink, isActive && css.activeLink);
@@ -21,17 +21,18 @@ function addClasses({ isActive }) {
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState({});
-  const imgUrl = 'https://image.tmdb.org/t/p/w500/';
   const location = useLocation();
-  const backlink = location.state?.pathname || '/movies';
+  const backlink = location.state || '/movies';
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     (async () => {
       try {
         const response = await getMovieById(movieId);
         setMovieData(response);
-      } catch (err) {
-        console.log(err);
+      } catch {
+        toast.error('Something went wrong, try again', { duration: 3000 });
       }
     })();
   }, [movieId]);
@@ -41,46 +42,9 @@ export default function MovieDetailsPage() {
       <Link to={backlink} className={css.backBtn}>
         <IoIosArrowRoundBack size={24} className={css.backIcon} /> Go back
       </Link>
-      <div className={css.detailsWrapper}>
-        <img src={`${imgUrl}${movieData.poster_path}`} className={css.poster} />
-        <div className={css.movieInfo}>
-          <h2 className={css.movieTitle}>{movieData.title}</h2>
-          <p className={css.movieDate}>
-            {movieData.release_date && formatDateToYear(movieData.release_date)}
-          </p>
-          <ul>
-            <li className={css.movieInfoItem}>
-              {movieData.production_countries?.length > 1
-                ? 'Counties:'
-                : 'Country:'}
-              &#160;
-              {movieData.production_countries?.map((country, idx) => (
-                <p key={idx} className={`${css.text} ${css.textList}`}>
-                  {country.name}
-                </p>
-              ))}
-            </li>
-            <li className={css.movieInfoItem}>
-              Genres:&#160;
-              {movieData.genres?.map((genre, idx) => (
-                <p key={idx} className={`${css.text} ${css.textList}`}>
-                  {genre.name}
-                </p>
-              ))}
-            </li>
-            <li className={css.movieInfoItem}>
-              Runtime:&#160;
-              <p className={css.text}>{formatRuntime(movieData.runtime)}</p>
-            </li>
-            <li className={css.movieInfoItem}>
-              Average:&#160;<p className={css.text}>{movieData.vote_average}</p>
-            </li>
-          </ul>
-          <p className={css.tagline}>{movieData.tagline}</p>
-          <h4 className={css.overview}>Overview</h4>
-          <p className={css.movieOverview}>{movieData.overview}</p>
-        </div>
-      </div>
+
+      <MovieDetails movie={movieData} />
+
       <ul className={css.additionalList}>
         <li>
           <NavLink to="reviews" state={location.state} className={addClasses}>

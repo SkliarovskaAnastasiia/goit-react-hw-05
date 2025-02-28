@@ -21,6 +21,7 @@
 .poster {
   border-radius: 8px 8px 0 0;
   margin-bottom: 4px;
+  aspect-ratio: 2 / 3;
   transition: scale 0.25s ease-in;
 }
 

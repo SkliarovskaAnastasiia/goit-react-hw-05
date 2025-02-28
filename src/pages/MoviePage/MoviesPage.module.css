@@ -1,0 +1,80 @@
+.form {
+  width: 80%;
+  background-color: #f1f1f1;
+  margin: 0 auto;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+
+  transition: background-color 0.25s ease-in, border-color 0.25s ease-in;
+}
+
+.form:focus-within {
+  background-color: #fafafa;
+  border-color: #747bff;
+}
+
+.formField {
+  background-color: transparent;
+  padding: 11px;
+  margin-right: 6px;
+  border: none;
+  outline: transparent;
+  flex-grow: 1;
+}
+
+.formField:placeholder-shown {
+  font-size: 13px;
+  font-style: italic;
+}
+
+.formBtn {
+  background-color: transparent;
+  border: none;
+  outline: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 11px;
+  color: #2a2a2ab6;
+}
+
+.form:focus-within .formBtn {
+  color: #747bff;
+}
+
+.navBtnList {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+  gap: 12px;
+}
+
+.navBtn {
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background-color: #f1f1f1;
+  padding: 8px 12px;
+
+  transition: border-color 0.25s ease-in, color 0.25s ease-in;
+}
+
+.navBtn:disabled {
+  color: #cdcdcd;
+}
+
+@media screen and (max-width: 767px) {
+  .navBtn:not(:disabled) {
+    border-color: #747bff;
+    color: #747bff;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .navBtn:hover,
+  .navBtn:focus {
+    border-color: #747bff;
+    color: #747bff;
+  }
+}

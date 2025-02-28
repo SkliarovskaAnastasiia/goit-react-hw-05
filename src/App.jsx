@@ -5,6 +5,7 @@ import Navigation from './components/Navigation/Navigation';
 import Footer from './components/Footer/Footer';
 import Loader from './components/Loader/Loader';
 import './App.css';
+import { Toaster } from 'react-hot-toast';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const MoviesPage = lazy(() => import('./pages/MoviePage/MoviesPage'));
@@ -35,6 +36,8 @@ function App() {
           </Routes>
         </Suspense>
       </main>
+
+      <Toaster />
 
       <Footer />
     </>

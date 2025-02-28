@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import MovieList from '../../components/MovieList/MovieList';
 import { getTrendingMovies } from '../../tmdb-api';
+import toast from 'react-hot-toast';
 
 export default function HomePage() {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -10,18 +11,16 @@ export default function HomePage() {
       try {
         const { results } = await getTrendingMovies();
         setTrendingMovies(results);
-      } catch (err) {
-        console.log(err);
+      } catch {
+        toast.error('Something went wrong, try again', { duration: 3000 });
       }
     })();
   }, []);
 
-  const memoizedMovies = useMemo(() => trendingMovies, [trendingMovies]);
-
   return (
     <>
       <h2 className="homePageTitle">Trending Today</h2>
-      <MovieList movies={memoizedMovies} />
+      <MovieList movies={trendingMovies} />
     </>
   );
 }

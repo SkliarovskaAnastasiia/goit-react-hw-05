@@ -1,6 +1,7 @@
 .actorImg {
   border-radius: 6px 6px 0 0;
   margin-bottom: 4px;
+  aspect-ratio: 2 / 3;
 }
 
 .actorName {

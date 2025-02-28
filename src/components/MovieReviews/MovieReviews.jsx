@@ -2,19 +2,20 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMoviesReviews } from '../../tmdb-api';
 import MovieReviewItem from '../MovieReviewItem/MovieReviewItem';
+import toast from 'react-hot-toast';
 import css from './MovieReviews.module.css';
 
 export default function MovieReviews() {
   const { movieId } = useParams();
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState(null);
 
   useEffect(() => {
     (async () => {
       try {
         const { results } = await getMoviesReviews(movieId);
         setReviews(results);
-      } catch (err) {
-        console.log(err);
+      } catch {
+        toast.error('Something went wrong, try again', { duration: 3000 });
       }
     })();
   }, [movieId]);
@@ -31,7 +32,7 @@ export default function MovieReviews() {
         </ul>
       ) : (
         <p className={css.noReviews}>
-          We dont&apos;n have any reviews for this movie
+          We don&apos;t have any reviews for this movie
         </p>
       )}
     </>
