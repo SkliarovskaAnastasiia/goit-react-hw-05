@@ -1,0 +1,15 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.message {
+  font-size: 40px;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #747bff;
+}
