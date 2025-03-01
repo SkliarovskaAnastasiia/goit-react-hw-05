@@ -18,8 +18,7 @@ export default function MovieCast() {
         toast.error('Something went wrong, try again', { duration: 3000 });
       }
     })();
-  }),
-    [movieId];
+  }, [movieId]);
 
   return (
     <>
