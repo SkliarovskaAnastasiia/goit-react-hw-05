@@ -1,5 +1,5 @@
 import { IoIosArrowRoundBack } from 'react-icons/io';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import {
   Link,
   NavLink,
@@ -22,7 +22,7 @@ export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState({});
   const location = useLocation();
-  const backlink = location.state || '/movies';
+  const backlink = useRef(location.state || '/movies');
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -39,7 +39,7 @@ export default function MovieDetailsPage() {
 
   return (
     <div className="container">
-      <Link to={backlink} className={css.backBtn}>
+      <Link to={backlink.current} className={css.backBtn}>
         <IoIosArrowRoundBack size={24} className={css.backIcon} /> Go back
       </Link>
 
