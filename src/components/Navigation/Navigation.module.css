@@ -1,16 +1,25 @@
 .header {
   background-color: #fafafa;
-  padding: 10px;
+  padding: 10px 32px;
   margin-bottom: 32px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  gap: 12px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+  color: #747bff;
+  font-weight: 500;
 }
 
 .navLink {
+  display: inline-block;
   padding: 8px;
   border: 1px solid transparent;
   border-radius: 6px;
@@ -25,4 +34,24 @@
 .navLink.activeLink {
   background-color: #747bff;
   color: #ffffff;
+}
+
+.navLink:first-child {
+  margin-right: 12px;
+}
+
+.langSelect {
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  outline: transparent;
+  padding: 8px;
+
+  color: #747bff;
+  transition: border-color 0.25s ease-in;
+}
+
+.langSelect:hover,
+.langSelect:focus {
+  border-color: #747bff;
 }

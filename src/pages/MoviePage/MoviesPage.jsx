@@ -8,7 +8,7 @@ import { useSearchParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import css from './MoviesPage.module.css';
 
-export default function MoviesPage() {
+export default function MoviesPage({ lang }) {
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -28,7 +28,11 @@ export default function MoviesPage() {
     (async () => {
       try {
         setNotFound(false);
-        const { results, total_pages } = await getMovieByName(query, page);
+        const { results, total_pages } = await getMovieByName(
+          query,
+          page,
+          lang
+        );
         setMovies(results);
         setTotalPages(total_pages);
 
@@ -37,7 +41,7 @@ export default function MoviesPage() {
         toast.error('Something went wrong, try again', { duration: 3000 });
       }
     })();
-  }, [query, page]);
+  }, [query, page, lang]);
 
   useEffect(() => {
     window.scrollTo({

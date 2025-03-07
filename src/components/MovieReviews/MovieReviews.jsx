@@ -5,20 +5,20 @@ import MovieReviewItem from '../MovieReviewItem/MovieReviewItem';
 import toast from 'react-hot-toast';
 import css from './MovieReviews.module.css';
 
-export default function MovieReviews() {
+export default function MovieReviews({ lang }) {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState(null);
 
   useEffect(() => {
     (async () => {
       try {
-        const { results } = await getMoviesReviews(movieId);
+        const { results } = await getMoviesReviews(movieId, lang);
         setReviews(results);
       } catch {
         toast.error('Something went wrong, try again', { duration: 3000 });
       }
     })();
-  }, [movieId]);
+  }, [movieId, lang]);
 
   return (
     <>

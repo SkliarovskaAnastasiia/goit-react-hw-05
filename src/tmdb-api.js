@@ -6,29 +6,37 @@ const ACCESS_TOKEN =
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 axios.defaults.headers.common['Authorization'] = `Bearer ${ACCESS_TOKEN}`;
 
-export async function getTrendingMovies() {
-  const response = await axios.get('trending/movie/day');
-  return response.data;
-}
-
-export async function getMovieById(movieId) {
-  const response = await axios.get(`movie/${movieId}`);
-  return response.data;
-}
-
-export async function getMovieByName(query, page) {
-  const response = await axios.get('search/movie', {
-    params: { query, page },
+export async function getTrendingMovies(language) {
+  const response = await axios.get('trending/movie/day', {
+    params: { language },
   });
   return response.data;
 }
 
-export async function getMovieCast(movieId) {
-  const response = await axios.get(`movie/${movieId}/credits`);
+export async function getMovieById(movieId, language) {
+  const response = await axios.get(`movie/${movieId}`, {
+    params: { language },
+  });
   return response.data;
 }
 
-export async function getMoviesReviews(movieId) {
-  const response = await axios.get(`movie/${movieId}}/reviews`);
+export async function getMovieByName(query, page, language) {
+  const response = await axios.get('search/movie', {
+    params: { query, page, language },
+  });
+  return response.data;
+}
+
+export async function getMovieCast(movieId, language) {
+  const response = await axios.get(`movie/${movieId}/credits`, {
+    params: { language },
+  });
+  return response.data;
+}
+
+export async function getMoviesReviews(movieId, language) {
+  const response = await axios.get(`movie/${movieId}}/reviews`, {
+    params: { language },
+  });
   return response.data;
 }

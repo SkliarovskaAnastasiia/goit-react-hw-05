@@ -5,20 +5,20 @@ import MovieCastItem from '../MovieCastItem/MovieCastItem';
 import css from './MovieCast.module.css';
 import toast from 'react-hot-toast';
 
-export default function MovieCast() {
+export default function MovieCast({ lang }) {
   const { movieId } = useParams();
   const [actors, setActors] = useState([]);
 
   useEffect(() => {
     (async () => {
       try {
-        const { cast } = await getMovieCast(movieId);
+        const { cast } = await getMovieCast(movieId, lang);
         setActors(cast);
       } catch {
         toast.error('Something went wrong, try again', { duration: 3000 });
       }
     })();
-  }, [movieId]);
+  }, [movieId, lang]);
 
   return (
     <>

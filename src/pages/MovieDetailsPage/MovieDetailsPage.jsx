@@ -18,7 +18,7 @@ function addClasses({ isActive }) {
   return clsx(css.itemLink, isActive && css.activeLink);
 }
 
-export default function MovieDetailsPage() {
+export default function MovieDetailsPage({ lang }) {
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState({});
   const location = useLocation();
@@ -29,13 +29,13 @@ export default function MovieDetailsPage() {
 
     (async () => {
       try {
-        const response = await getMovieById(movieId);
+        const response = await getMovieById(movieId, lang);
         setMovieData(response);
       } catch {
         toast.error('Something went wrong, try again', { duration: 3000 });
       }
     })();
-  }, [movieId]);
+  }, [movieId, lang]);
 
   return (
     <div className="container">

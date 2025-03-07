@@ -1,6 +1,6 @@
 // import { useState } from "react";
 import { Route, Routes } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import Navigation from './components/Navigation/Navigation';
 import Footer from './components/Footer/Footer';
 import Loader from './components/Loader/Loader';
@@ -19,18 +19,33 @@ const MovieReviews = lazy(() =>
 );
 
 function App() {
+  const [lang, setLang] = useState(() => {
+    const langVal = localStorage.getItem('lang');
+    if (langVal !== null) return langVal;
+
+    return 'en-US';
+  });
+
+  const handleChangeLang = selectedLang => {
+    setLang(selectedLang);
+    localStorage.setItem('lang', selectedLang);
+  };
+
   return (
     <>
-      <Navigation />
+      <Navigation value={lang} onChange={handleChangeLang} />
 
       <main id="main">
         <Suspense fallback={<Loader />}>
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/movies" element={<MoviesPage />} />
-            <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
-              <Route path="cast" element={<MovieCast />} />
-              <Route path="reviews" element={<MovieReviews />} />
+            <Route path="/" element={<HomePage lang={lang} />} />
+            <Route path="/movies" element={<MoviesPage lang={lang} />} />
+            <Route
+              path="/movies/:movieId"
+              element={<MovieDetailsPage lang={lang} />}
+            >
+              <Route path="cast" element={<MovieCast lang={lang} />} />
+              <Route path="reviews" element={<MovieReviews lang={lang} />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
