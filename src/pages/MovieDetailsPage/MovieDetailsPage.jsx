@@ -7,11 +7,12 @@ import {
   useLocation,
   useParams,
 } from 'react-router-dom';
-import { getMovieById } from '../../tmdb-api';
+import { getMovieById } from '../../utils/tmdb-api';
 import clsx from 'clsx';
 import Loader from '../../components/Loader/Loader';
 import MovieDetails from '../../components/MovieDetails/MovieDetails';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import css from './MovieDetailsPage.module.css';
 
 function addClasses({ isActive }) {
@@ -23,6 +24,8 @@ export default function MovieDetailsPage({ lang }) {
   const [movieData, setMovieData] = useState({});
   const location = useLocation();
   const backlink = useRef(location.state || '/movies');
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -40,7 +43,8 @@ export default function MovieDetailsPage({ lang }) {
   return (
     <div className="container">
       <Link to={backlink.current} className={css.backBtn}>
-        <IoIosArrowRoundBack size={24} className={css.backIcon} /> Go back
+        <IoIosArrowRoundBack size={24} className={css.backIcon} />
+        <p>{t('movieDetailsPage.backlink')}</p>
       </Link>
 
       <MovieDetails movie={movieData} />
@@ -48,12 +52,12 @@ export default function MovieDetailsPage({ lang }) {
       <ul className={css.additionalList}>
         <li>
           <NavLink to="reviews" state={location.state} className={addClasses}>
-            Reviews
+            {t('movieDetailsPage.reviews')}
           </NavLink>
         </li>
         <li>
           <NavLink to="cast" state={location.state} className={addClasses}>
-            Cast
+            {t('movieDetailsPage.cast')}
           </NavLink>
         </li>
       </ul>

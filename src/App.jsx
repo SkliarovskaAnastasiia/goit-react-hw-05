@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer';
 import Loader from './components/Loader/Loader';
 import './App.css';
 import { Toaster } from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const MoviesPage = lazy(() => import('./pages/MoviePage/MoviesPage'));
@@ -26,8 +27,11 @@ function App() {
     return 'en-US';
   });
 
+  const { i18n } = useTranslation();
+
   const handleChangeLang = selectedLang => {
     setLang(selectedLang);
+    i18n.changeLanguage(selectedLang);
     localStorage.setItem('lang', selectedLang);
   };
 

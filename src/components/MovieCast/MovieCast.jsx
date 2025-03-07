@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
-import { getMovieCast } from '../../tmdb-api';
+import { getMovieCast } from '../../utils/tmdb-api';
 import { useParams } from 'react-router-dom';
 import MovieCastItem from '../MovieCastItem/MovieCastItem';
 import css from './MovieCast.module.css';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 export default function MovieCast({ lang }) {
   const { movieId } = useParams();
   const [actors, setActors] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     (async () => {
@@ -31,9 +33,7 @@ export default function MovieCast({ lang }) {
           ))}
         </ul>
       ) : (
-        <p className={css.noCast}>
-          We don&apos;t have any information about cast
-        </p>
+        <p className={css.noCast}>{t('cast.noCast')}</p>
       )}
     </>
   );

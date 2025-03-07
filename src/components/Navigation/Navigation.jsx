@@ -6,6 +6,7 @@ import { useMediaQuery } from 'react-responsive';
 import clsx from 'clsx';
 import css from './Navigation.module.css';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 function addClasses({ isActive }) {
   return clsx(css.navLink, isActive && css.activeLink);
@@ -21,6 +22,7 @@ export default function Navigation({ value, onChange }) {
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  const { t } = useTranslation();
   return (
     <header className={css.header}>
       <Link to="/" className={css.logo}>
@@ -48,7 +50,7 @@ export default function Navigation({ value, onChange }) {
                 </button>
                 <li>
                   <NavLink to="/" className={addClasses} onClick={toggleMenu}>
-                    Home
+                    {t('navigation.home')}
                   </NavLink>
                 </li>
                 <li>
@@ -57,7 +59,7 @@ export default function Navigation({ value, onChange }) {
                     className={addClasses}
                     onClick={() => setIsOpen(!isOpen)}
                   >
-                    Movies
+                    {t('navigation.movies')}
                   </NavLink>
                 </li>
                 <li>
@@ -90,10 +92,10 @@ export default function Navigation({ value, onChange }) {
         <>
           <div>
             <NavLink to="/" className={addClasses}>
-              Home
+              {t('navigation.home')}
             </NavLink>
             <NavLink to="/movies" className={addClasses}>
-              Movies
+              {t('navigation.movies')}
             </NavLink>
           </div>
 

@@ -20,6 +20,13 @@ export async function getMovieById(movieId, language) {
   return response.data;
 }
 
+export async function getTopRatedMovies(page, language) {
+  const response = await axios.get('movie/top_rated', {
+    params: { page, language },
+  });
+  return response.data;
+}
+
 export async function getMovieByName(query, page, language) {
   const response = await axios.get('search/movie', {
     params: { query, page, language },

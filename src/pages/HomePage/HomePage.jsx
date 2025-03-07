@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import MovieList from '../../components/MovieList/MovieList';
-import { getTrendingMovies } from '../../tmdb-api';
+import { getTrendingMovies } from '../../utils/tmdb-api';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 export default function HomePage({ lang }) {
   const [trendingMovies, setTrendingMovies] = useState([]);
-
+  const { t } = useTranslation();
   useEffect(() => {
     (async () => {
       try {
@@ -19,7 +20,7 @@ export default function HomePage({ lang }) {
 
   return (
     <>
-      <h2 className="homePageTitle">Trending Today</h2>
+      <h2 className="homePageTitle">{t('homePage.title')}</h2>
       <MovieList movies={trendingMovies} />
     </>
   );

@@ -2,11 +2,12 @@ import { IoSearchOutline } from 'react-icons/io5';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import MovieList from '../../components/MovieList/MovieList';
-import { getMovieByName } from '../../tmdb-api';
+import { getMovieByName, getTopRatedMovies } from '../../utils/tmdb-api';
 import { Formik, Form, Field } from 'formik';
 import { useSearchParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import css from './MoviesPage.module.css';
+import { t } from 'i18next';
 
 export default function MoviesPage({ lang }) {
   const [movies, setMovies] = useState([]);
@@ -21,6 +22,18 @@ export default function MoviesPage({ lang }) {
   const inputRef = useRef();
   const nextBtnRef = useRef();
   const prevBtnRef = useRef();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { results, total_pages } = await getTopRatedMovies(page, lang);
+        setMovies(results);
+        setTotalPages(total_pages);
+      } catch {
+        toast.error('Something went wrong, try again', { duration: 3000 });
+      }
+    })();
+  }, [page, lang]);
 
   useEffect(() => {
     if (query === '') return;
@@ -116,7 +129,7 @@ export default function MoviesPage({ lang }) {
       {movies.length > 0 && <MovieList movies={memoizedMovies} />}
       {notFound && (
         <div className={css.textWrapper}>
-          <p className={css.notFoundText}>Sorry, nothing found</p>
+          <p className={css.notFoundText}>{t('moviePage.notFound')}</p>
         </div>
       )}
 
