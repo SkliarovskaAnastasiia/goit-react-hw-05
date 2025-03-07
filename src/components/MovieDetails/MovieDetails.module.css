@@ -55,6 +55,24 @@
   color: #747bff;
 }
 
+.movieOverview {
+  margin-bottom: 10px;
+}
+
+.trailerBtn {
+  background-color: transparent;
+  border: 1px solid #747bff;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 0 auto;
+  outline: transparent;
+  display: flex;
+  justify-content: center;
+  align-self: flex-start;
+  gap: 6px;
+  color: #747bff;
+}
+
 @media screen and (min-width: 700px) {
   .detailsWrapper {
     display: flex;
@@ -68,10 +86,23 @@
 
   .movieInfo {
     max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .movieTitle,
   .movieDate {
     text-align: left;
+  }
+
+  .trailerBtn {
+    margin: 0;
+    border-color: transparent;
+    transition: border-color 0.25s ease-in;
+  }
+  .trailerBtn:hover,
+  .trailerBtn:focus {
+    border-color: #747bff;
   }
 }

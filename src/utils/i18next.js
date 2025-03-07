@@ -30,6 +30,7 @@ const resources = {
         runtime: 'Runtime',
         avarage: 'Average',
         overview: 'Overview',
+        trailer: 'Whatch trailer',
       },
 
       reviews: { noReviews: "We don't have any reviews for this movie" },
@@ -66,6 +67,7 @@ const resources = {
         runtime: 'Тривалість',
         avarage: 'Рейтинг',
         overview: 'Опис',
+        trailer: 'Подивитися трейлер',
       },
 
       reviews: { noReviews: 'До цього філму ще немає жодної рецензії' },

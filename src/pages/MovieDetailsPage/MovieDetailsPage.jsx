@@ -47,7 +47,7 @@ export default function MovieDetailsPage({ lang }) {
         <p>{t('movieDetailsPage.backlink')}</p>
       </Link>
 
-      <MovieDetails movie={movieData} />
+      <MovieDetails movie={movieData} lang={lang} />
 
       <ul className={css.additionalList}>
         <li>

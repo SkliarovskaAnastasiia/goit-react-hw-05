@@ -1,12 +1,11 @@
-// import { useState } from "react";
 import { Route, Routes } from 'react-router-dom';
 import { lazy, Suspense, useState } from 'react';
+import { Toaster } from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import Navigation from './components/Navigation/Navigation';
 import Footer from './components/Footer/Footer';
 import Loader from './components/Loader/Loader';
 import './App.css';
-import { Toaster } from 'react-hot-toast';
-import { useTranslation } from 'react-i18next';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const MoviesPage = lazy(() => import('./pages/MoviePage/MoviesPage'));

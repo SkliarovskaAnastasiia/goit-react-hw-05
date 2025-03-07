@@ -47,3 +47,10 @@ export async function getMoviesReviews(movieId, language) {
   });
   return response.data;
 }
+
+export async function getMovieTrailer(movieId, language) {
+  const response = await axios.get(`movie/${movieId}/videos`, {
+    params: { language },
+  });
+  return response.data;
+}

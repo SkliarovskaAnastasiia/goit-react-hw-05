@@ -17,8 +17,6 @@ export default function MoviesPage({ lang }) {
   const page = Number(searchParams.get('page')) || 1;
   const [totalPages, setTotalPages] = useState(0);
 
-  const [notFound, setNotFound] = useState(false);
-
   const inputRef = useRef();
   const nextBtnRef = useRef();
   const prevBtnRef = useRef();
@@ -40,7 +38,6 @@ export default function MoviesPage({ lang }) {
 
     (async () => {
       try {
-        setNotFound(false);
         const { results, total_pages } = await getMovieByName(
           query,
           page,
@@ -48,8 +45,6 @@ export default function MoviesPage({ lang }) {
         );
         setMovies(results);
         setTotalPages(total_pages);
-
-        if (results.length === 0) setNotFound(true);
       } catch {
         toast.error('Something went wrong, try again', { duration: 3000 });
       }
@@ -127,7 +122,7 @@ export default function MoviesPage({ lang }) {
         </Form>
       </Formik>
       {movies.length > 0 && <MovieList movies={memoizedMovies} />}
-      {notFound && (
+      {movies.length === 0 && (
         <div className={css.textWrapper}>
           <p className={css.notFoundText}>{t('moviePage.notFound')}</p>
         </div>
