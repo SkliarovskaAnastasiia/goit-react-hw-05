@@ -32,9 +32,9 @@ const resources = {
         overview: 'Overview',
       },
 
-      reviews: { noReviews: 'We don&apos;t have any reviews for this movie' },
+      reviews: { noReviews: "We don't have any reviews for this movie" },
 
-      cast: { noCast: 'We don&apos;t have any information about cast' },
+      cast: { noCast: "We don't have any information about cast" },
     },
   },
 
@@ -79,6 +79,7 @@ i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     fallbackLng: 'en-US',
+    lng: localStorage.getItem('lang') || 'en-US',
     resources,
     interpolation: {
       escapeValue: false, // react already safes from xss

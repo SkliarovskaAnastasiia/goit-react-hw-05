@@ -5,7 +5,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import clsx from 'clsx';
 import css from './Navigation.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 function addClasses({ isActive }) {
@@ -21,6 +21,12 @@ export default function Navigation({ value, onChange }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+
+    return () => (document.body.style.overflow = 'auto');
+  }, [isOpen]);
 
   const { t } = useTranslation();
   return (
@@ -39,8 +45,8 @@ export default function Navigation({ value, onChange }) {
             <IoMenu size={24} />
           </button>
           {isOpen && (
-            <>
-              <ul className={css.mobMenu}>
+            <div className={css.mobBackdrop} onClick={toggleMenu}>
+              <ul className={css.mobMenu} onClick={e => e.stopPropagation()}>
                 <button
                   type="button"
                   className={css.closeMenu}
@@ -57,7 +63,7 @@ export default function Navigation({ value, onChange }) {
                   <NavLink
                     to="/movies"
                     className={addClasses}
-                    onClick={() => setIsOpen(!isOpen)}
+                    onClick={toggleMenu}
                   >
                     {t('navigation.movies')}
                   </NavLink>
@@ -85,7 +91,7 @@ export default function Navigation({ value, onChange }) {
                   </select>
                 </li>
               </ul>
-            </>
+            </div>
           )}
         </>
       ) : (

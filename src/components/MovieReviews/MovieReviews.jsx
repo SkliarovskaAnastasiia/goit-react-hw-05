@@ -15,7 +15,6 @@ export default function MovieReviews({ lang }) {
     (async () => {
       try {
         const { results } = await getMoviesReviews(movieId, lang);
-        console.log(results);
         setReviews(results);
       } catch {
         toast.error('Something went wrong, try again', { duration: 3000 });
