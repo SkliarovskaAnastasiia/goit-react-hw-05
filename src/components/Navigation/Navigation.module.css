@@ -5,7 +5,7 @@
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -24,20 +24,14 @@
   border: 1px solid transparent;
   border-radius: 6px;
   font-weight: 500;
+  color: #fafafa;
   transition: border-color 0.3s ease-in, background-color 0.3s ease-in,
     color 0.3s ease-in;
 }
-.navLink:hover,
-.navLink:focus {
-  border-color: #747bff;
-}
+
 .navLink.activeLink {
   background-color: #747bff;
   color: #ffffff;
-}
-
-.navLink:first-child {
-  margin-right: 12px;
 }
 
 .langSelect {
@@ -46,12 +40,77 @@
   border-radius: 6px;
   outline: transparent;
   padding: 8px;
-
-  color: #747bff;
+  font-weight: 500;
+  color: #fafafa;
   transition: border-color 0.25s ease-in;
 }
 
-.langSelect:hover,
-.langSelect:focus {
-  border-color: #747bff;
+.langOption {
+  color: #747bff;
+}
+
+.openMenuBtn {
+  border: none;
+  outline: transparent;
+  background-color: transparent;
+  color: #747bff;
+  line-height: 0;
+}
+
+.mobMenu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 250px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  background-color: #9ea3ffc3;
+  backdrop-filter: blur(10px);
+  box-shadow: -20px 0 40px rgba(0, 0, 0, 0.1);
+}
+
+.closeMenu {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+  border: none;
+  outline: transparent;
+  background-color: transparent;
+  color: #fafafa;
+  line-height: 0;
+}
+
+@media screen and (min-width: 660px) {
+  .header {
+    justify-content: space-around;
+  }
+
+  .navLink {
+    color: #747bff;
+  }
+
+  .navLink:hover,
+  .navLink:focus {
+    border-color: #747bff;
+  }
+
+  .navLink:first-child {
+    margin-right: 12px;
+  }
+
+  .langSelect {
+    color: #747bff;
+  }
+
+  .langSelect:hover,
+  .langSelect:focus {
+    border-color: #747bff;
+  }
 }

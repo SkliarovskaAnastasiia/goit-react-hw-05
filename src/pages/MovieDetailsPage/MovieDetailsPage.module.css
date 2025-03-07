@@ -1,4 +1,5 @@
 .backBtn {
+  max-width: 120px;
   background-color: transparent;
   border: none;
   outline: transparent;
