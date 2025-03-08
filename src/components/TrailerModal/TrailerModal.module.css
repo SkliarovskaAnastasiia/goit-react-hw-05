@@ -1,0 +1,26 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.25s ease-in;
+}
+.modalOverlayAfterOpen {
+  opacity: 1;
+}
+.modalOverlayBeforeClose {
+  opacity: 0;
+}
+
+.modalContent {
+  width: 80%;
+  max-width: 1024px;
+  aspect-ratio: 16 / 9;
+  background-color: transparent;
+}
