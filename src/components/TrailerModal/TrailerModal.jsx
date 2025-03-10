@@ -15,7 +15,13 @@ export default function TrailerModal({ movieId, lang, isOpen, onCloseModal }) {
 
     (async () => {
       const { results } = await getMovieTrailer(movieId, lang);
-      const trailerData = results.find(result => result.type === 'Trailer');
+      let trailerData = results.find(result => result.type === 'Trailer');
+
+      if (!trailerData && lang === 'uk-UA') {
+        const { results } = await getMovieTrailer(movieId, 'en-US');
+        trailerData = results.find(result => result.type === 'Trailer');
+      }
+
       setTrailerKey(trailerData.key);
     })();
   }, [movieId, lang]);
@@ -35,13 +41,7 @@ export default function TrailerModal({ movieId, lang, isOpen, onCloseModal }) {
       }}
     >
       {isOpen && (
-        <iframe
-          src={videoUrl}
-          width="100%"
-          height="100%"
-          allowFullScreen
-          frameBorder="0"
-        />
+        <iframe src={videoUrl} width="100%" height="100%" allowFullScreen />
       )}
     </ReactModal>
   );

@@ -9,6 +9,9 @@ import './App.css';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const MoviesPage = lazy(() => import('./pages/MoviePage/MoviesPage'));
+const RandomMoviePage = lazy(() =>
+  import('./pages/RandomMoviePage/RandomMoviePage')
+);
 const MovieDetailsPage = lazy(() =>
   import('./pages/MovieDetailsPage/MovieDetailsPage')
 );
@@ -43,6 +46,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage lang={lang} />} />
             <Route path="/movies" element={<MoviesPage lang={lang} />} />
+            <Route path="/random" element={<RandomMoviePage lang={lang} />} />
             <Route
               path="/movies/:movieId"
               element={<MovieDetailsPage lang={lang} />}

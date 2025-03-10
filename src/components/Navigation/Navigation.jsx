@@ -3,10 +3,10 @@ import { IoMenu } from 'react-icons/io5';
 import { IoClose } from 'react-icons/io5';
 import { Link, NavLink } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import clsx from 'clsx';
-import css from './Navigation.module.css';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import clsx from 'clsx';
+import css from './Navigation.module.css';
 
 function addClasses({ isActive }) {
   return clsx(css.navLink, isActive && css.activeLink);
@@ -69,6 +69,11 @@ export default function Navigation({ value, onChange }) {
                   </NavLink>
                 </li>
                 <li>
+                  <NavLink to="/random" className={addClasses}>
+                    {t('navigation.random')}
+                  </NavLink>
+                </li>
+                <li>
                   <select
                     value={value}
                     onChange={handleLangChange}
@@ -102,6 +107,9 @@ export default function Navigation({ value, onChange }) {
             </NavLink>
             <NavLink to="/movies" className={addClasses}>
               {t('navigation.movies')}
+            </NavLink>
+            <NavLink to="/random" className={addClasses}>
+              {t('navigation.random')}
             </NavLink>
           </div>
 

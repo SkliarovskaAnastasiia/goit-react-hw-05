@@ -1,0 +1,48 @@
+.heroBgd {
+  height: 400px;
+  background-size: cover;
+  padding: 32px;
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: #fafafa;
+}
+
+.heroTitle {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.heroLink {
+  display: block;
+  background-color: transparent;
+  border: 1px solid #fafafa;
+  border-radius: 8px;
+  padding: 12px;
+  background-color: #00000074;
+  width: fit-content;
+  margin: 0 auto;
+  line-height: 1.15;
+  transition: transform 0.25s ease-in;
+}
+
+@media screen and (min-width: 700px) {
+  .heroBgd {
+    height: 500px;
+  }
+
+  .heroTitle {
+    font-size: 48px;
+  }
+
+  .heroLink {
+    font-size: 20px;
+  }
+  .heroLink:hover,
+  .heroLink:focus {
+    transform: scale(1.02);
+  }
+}

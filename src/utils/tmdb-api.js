@@ -27,6 +27,13 @@ export async function getTopRatedMovies(page, language) {
   return response.data;
 }
 
+export async function getPopularMovies(page, language) {
+  const response = await axios.get('movie/popular', {
+    params: { page, language },
+  });
+  return response.data;
+}
+
 export async function getMovieByName(query, page, language) {
   const response = await axios.get('search/movie', {
     params: { query, page, language },

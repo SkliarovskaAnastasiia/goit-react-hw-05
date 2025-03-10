@@ -2,10 +2,10 @@ import { IoPlay } from 'react-icons/io5';
 import { formatDateToYear } from '../../helpers/formatDateToYear';
 import { formatRuntime } from '../../helpers/formatRuntime';
 import { useTranslation } from 'react-i18next';
-import noPosterHolder from '../../assets/noPosterHolder.jpg';
-import css from './MovieDetails.module.css';
-import TrailerModal from '../TrailerModal/TrailerModal';
 import { useState } from 'react';
+import noPosterHolder from '../../assets/noPosterHolder.jpg';
+import TrailerModal from '../TrailerModal/TrailerModal';
+import css from './MovieDetails.module.css';
 
 export default function MovieDetails({
   movie: {

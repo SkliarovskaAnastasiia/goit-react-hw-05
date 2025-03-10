@@ -7,14 +7,25 @@ const resources = {
       navigation: {
         home: 'Home',
         movies: 'Movies',
+        random: 'Random movie',
       },
 
       homePage: {
         title: 'Trending Today',
       },
 
+      hero: {
+        title: 'Looking for a movie to watch tonight',
+        clickBtn: 'Click here',
+      },
+
       moviePage: {
         notFound: 'Sorry, nothing found',
+      },
+
+      randomPage: {
+        generateBtn: 'Generate movie',
+        seeMore: 'See more',
       },
 
       movieDetailsPage: {
@@ -44,14 +55,25 @@ const resources = {
       navigation: {
         home: 'Головна',
         movies: 'Фільми',
+        random: 'Випадковий фільм',
       },
 
       homePage: {
         title: 'У тренді',
       },
 
+      hero: {
+        title: 'Шукаєш що подивитись',
+        clickBtn: 'Тицяй тут',
+      },
+
       moviePage: {
         notFound: 'Нічого не знайдено',
+      },
+
+      randomPage: {
+        generateBtn: 'Згенерувати фільм',
+        seeMore: 'Дізнатися більше',
       },
 
       movieDetailsPage: {

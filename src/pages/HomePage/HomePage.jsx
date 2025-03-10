@@ -3,6 +3,7 @@ import MovieList from '../../components/MovieList/MovieList';
 import { getTrendingMovies } from '../../utils/tmdb-api';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
+import Hero from '../../components/Hero/Hero';
 
 export default function HomePage({ lang }) {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -20,6 +21,7 @@ export default function HomePage({ lang }) {
 
   return (
     <>
+      <Hero />
       <h2 className="homePageTitle">{t('homePage.title')}</h2>
       <MovieList movies={trendingMovies} />
     </>

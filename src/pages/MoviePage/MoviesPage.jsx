@@ -22,6 +22,11 @@ export default function MoviesPage({ lang }) {
   const prevBtnRef = useRef();
 
   useEffect(() => {
+    document.title = 'FilmFinder | Movies';
+    return () => (document.title = 'FilmFinder');
+  }, []);
+
+  useEffect(() => {
     (async () => {
       try {
         const { results, total_pages } = await getTopRatedMovies(page, lang);

@@ -1,7 +1,7 @@
 .header {
   background-color: #fafafa;
   padding: 10px 32px;
-  margin-bottom: 32px;
+
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
   display: flex;
@@ -111,7 +111,7 @@
     border-color: #747bff;
   }
 
-  .navLink:first-child {
+  .navLink:not(:last-child) {
     margin-right: 12px;
   }
 

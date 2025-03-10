@@ -34,10 +34,13 @@ export default function MovieDetailsPage({ lang }) {
       try {
         const response = await getMovieById(movieId, lang);
         setMovieData(response);
+        document.title = `${response.title}`;
       } catch {
         toast.error('Something went wrong, try again', { duration: 3000 });
       }
     })();
+
+    return () => (document.title = 'FilmFinder');
   }, [movieId, lang]);
 
   return (
