@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import { lazy, Suspense, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
-import Navigation from './components/Navigation/Navigation';
+import AppBar from './components/AppBar/AppBar';
 import Footer from './components/Footer/Footer';
 import Loader from './components/Loader/Loader';
 import './App.css';
@@ -39,7 +39,7 @@ function App() {
 
   return (
     <>
-      <Navigation value={lang} onChange={handleChangeLang} />
+      <AppBar value={lang} onChange={handleChangeLang} />
 
       <main id="main">
         <Suspense fallback={<Loader />}>

@@ -14,23 +14,7 @@ export default function RandomMoviePage({ lang }) {
   const imgUrl = 'https://image.tmdb.org/t/p/w500/';
   const location = useLocation();
   const [movie, setMovie] = useState(null);
-  const [posters, setPosters] = useState();
-
   useEffect(() => {
-    (async () => {
-      const firstData = await getPopularMovies(1, lang);
-      const postersUrls = firstData.results.map(
-        result => `${imgUrl}${result.poster_path}`
-      );
-
-      const secondData = await getPopularMovies(2, lang);
-      const postersUrlsTwo = secondData.results.map(
-        result => `${imgUrl}${result.poster_path}`
-      );
-
-      setPosters([...postersUrls, ...postersUrlsTwo]);
-    })();
-
     document.title = 'FilmFinder | Random Movie';
     return () => (document.title = 'FilmFinder');
   }, [lang]);
@@ -53,29 +37,7 @@ export default function RandomMoviePage({ lang }) {
       </div>
 
       <div className={css.wrapper}>
-        {!movie ? (
-          <div>
-            <div className={css.scroller}>
-              <div className={css.scrollerInner}>
-                <ul className={css.posters}>
-                  {posters?.map((poster, idx) => (
-                    <li key={idx} className={css.poster}>
-                      <img src={poster} />
-                    </li>
-                  ))}
-                </ul>
-                <div className={css.posterBackground}></div>
-                {/* <ul className={css.posters}>
-                  {posters?.map((poster, idx) => (
-                    <li key={`1-${idx}`} className={css.poster}>
-                      <img src={poster} />
-                    </li>
-                  ))}
-                </ul> */}
-              </div>
-            </div>
-          </div>
-        ) : (
+        {movie && (
           <div
             className={css.movieInfo}
             style={{

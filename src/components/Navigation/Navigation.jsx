@@ -1,132 +1,46 @@
-import { IoFilmOutline } from 'react-icons/io5';
-import { IoMenu } from 'react-icons/io5';
-import { IoClose } from 'react-icons/io5';
-import { Link, NavLink } from 'react-router-dom';
-import { useMediaQuery } from 'react-responsive';
-import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 import css from './Navigation.module.css';
 
-function addClasses({ isActive }) {
+function addLinksClasses({ isActive }) {
   return clsx(css.navLink, isActive && css.activeLink);
 }
 
-export default function Navigation({ value, onChange }) {
+export default function Navigation({ value, onChange, toggleMenu }) {
   const handleLangChange = e => {
     onChange(e.target.value);
   };
 
-  const isMobile = useMediaQuery({ maxWidth: 660 });
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => setIsOpen(!isOpen);
-
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
-
-    return () => (document.body.style.overflow = 'auto');
-  }, [isOpen]);
-
   const { t } = useTranslation();
   return (
-    <header className={css.header}>
-      <Link to="/" className={css.logo}>
-        <p>FilmFinder</p> <IoFilmOutline size={22} color="#747bff" />
-      </Link>
+    <>
+      <div className={css.navigation}>
+        <NavLink to="/" className={addLinksClasses} onClick={toggleMenu}>
+          {t('navigation.home')}
+        </NavLink>
 
-      {isMobile ? (
-        <>
-          <button
-            type="button"
-            onClick={toggleMenu}
-            className={css.openMenuBtn}
-          >
-            <IoMenu size={24} />
-          </button>
-          {isOpen && (
-            <div className={css.mobBackdrop} onClick={toggleMenu}>
-              <ul className={css.mobMenu} onClick={e => e.stopPropagation()}>
-                <button
-                  type="button"
-                  className={css.closeMenu}
-                  onClick={toggleMenu}
-                >
-                  <IoClose size={24} />
-                </button>
-                <li>
-                  <NavLink to="/" className={addClasses} onClick={toggleMenu}>
-                    {t('navigation.home')}
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/movies"
-                    className={addClasses}
-                    onClick={toggleMenu}
-                  >
-                    {t('navigation.movies')}
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/random" className={addClasses}>
-                    {t('navigation.random')}
-                  </NavLink>
-                </li>
-                <li>
-                  <select
-                    value={value}
-                    onChange={handleLangChange}
-                    className={css.langSelect}
-                  >
-                    <option
-                      name="lang"
-                      value="en-US"
-                      className={css.langOption}
-                    >
-                      EN
-                    </option>
-                    <option
-                      name="lang"
-                      value="uk-UA"
-                      className={css.langOption}
-                    >
-                      UA
-                    </option>
-                  </select>
-                </li>
-              </ul>
-            </div>
-          )}
-        </>
-      ) : (
-        <>
-          <div>
-            <NavLink to="/" className={addClasses}>
-              {t('navigation.home')}
-            </NavLink>
-            <NavLink to="/movies" className={addClasses}>
-              {t('navigation.movies')}
-            </NavLink>
-            <NavLink to="/random" className={addClasses}>
-              {t('navigation.random')}
-            </NavLink>
-          </div>
+        <NavLink to="/movies" className={addLinksClasses} onClick={toggleMenu}>
+          {t('navigation.movies')}
+        </NavLink>
 
-          <select
-            value={value}
-            onChange={handleLangChange}
-            className={css.langSelect}
-          >
-            <option name="lang" value="en-US">
-              EN
-            </option>
-            <option name="lang" value="uk-UA">
-              UA
-            </option>
-          </select>
-        </>
-      )}
-    </header>
+        <NavLink to="/random" className={addLinksClasses}>
+          {t('navigation.random')}
+        </NavLink>
+      </div>
+
+      <select
+        value={value}
+        onChange={handleLangChange}
+        className={css.langSelect}
+      >
+        <option name="lang" value="en-US" className={css.langOption}>
+          EN
+        </option>
+        <option name="lang" value="uk-UA" className={css.langOption}>
+          UA
+        </option>
+      </select>
+    </>
   );
 }
