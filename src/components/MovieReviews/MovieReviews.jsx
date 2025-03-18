@@ -6,6 +6,7 @@ import { LangContext } from '../langContext';
 import MovieReviewItem from '../MovieReviewItem/MovieReviewItem';
 import toast from 'react-hot-toast';
 import css from './MovieReviews.module.css';
+import Loader from '../Loader/Loader';
 
 export default function MovieReviews() {
   const { lang } = use(LangContext);
@@ -13,21 +14,27 @@ export default function MovieReviews() {
 
   const { movieId } = useParams();
   const [reviews, setReviews] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
+
     (async () => {
       try {
         const { results } = await getMoviesReviews(movieId, lang);
         setReviews(results);
       } catch {
         toast.error('Something went wrong, try again', { duration: 3000 });
+      } finally {
+        setIsLoading(false);
       }
     })();
   }, [movieId, lang]);
 
   return (
     <>
-      {reviews?.length > 0 ? (
+      {isLoading && <Loader />}{' '}
+      {reviews?.length > 0 && (
         <ul className={css.reviewslist}>
           {reviews.map(review => (
             <li key={review.id} className={css.reviewItem}>
@@ -35,7 +42,8 @@ export default function MovieReviews() {
             </li>
           ))}
         </ul>
-      ) : (
+      )}
+      {reviews?.length === 0 && !isLoading && (
         <p className={css.noReviews}>{t('reviews.noReviews')}</p>
       )}
     </>

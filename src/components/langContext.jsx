@@ -19,5 +19,5 @@ export const LangProvider = ({ children }) => {
     localStorage.setItem('lang', selectedLang);
   };
 
-  return <LangContext value={(lang, changeLang)}>{children}</LangContext>;
+  return <LangContext value={{ lang, changeLang }}>{children}</LangContext>;
 };

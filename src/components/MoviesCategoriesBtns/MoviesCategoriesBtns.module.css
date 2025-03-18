@@ -1,0 +1,38 @@
+.categoryList {
+  width: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 0 auto;
+}
+
+.category {
+  background-color: transparent;
+  border: 1px solid #747bff;
+  border-radius: 6px;
+  padding: 8px;
+  line-height: 1.5;
+  color: #747bff;
+  font-weight: 500;
+
+  transition: background-color 0.25s linear, color 0.25s linear,
+    border-color 0.25s linear;
+}
+
+.category.active {
+  background-color: #747bff;
+  color: #fafafa;
+}
+
+@media screen and (min-width: 660px) {
+  .category {
+    border-color: transparent;
+  }
+
+  .category:hover,
+  .category:focus {
+    border-color: #747bff;
+  }
+}

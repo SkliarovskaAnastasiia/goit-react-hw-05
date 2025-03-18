@@ -58,9 +58,4 @@
   .langSelect {
     color: #747bff;
   }
-
-  .langSelect:hover,
-  .langSelect:focus {
-    border-color: #747bff;
-  }
 }

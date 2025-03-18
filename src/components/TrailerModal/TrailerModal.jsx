@@ -1,31 +1,10 @@
-import { useEffect, useState } from 'react';
-import { getMovieTrailer } from '../../utils/tmdb-api';
 import ReactModal from 'react-modal';
 import Modal from 'react-modal';
 import css from './TrailerModal.module.css';
 
 Modal.setAppElement('#root');
 
-export default function TrailerModal({ movieId, lang, isOpen, onCloseModal }) {
-  const [trailerKey, setTrailerKey] = useState();
-  const videoUrl = `https://www.youtube-nocookie.com/embed/${trailerKey}`;
-
-  useEffect(() => {
-    if (!movieId) return;
-
-    (async () => {
-      const { results } = await getMovieTrailer(movieId, lang);
-      let trailerData = results.find(result => result.type === 'Trailer');
-
-      if (!trailerData && lang === 'uk-UA') {
-        const { results } = await getMovieTrailer(movieId, 'en-US');
-        trailerData = results.find(result => result.type === 'Trailer');
-      }
-
-      setTrailerKey(trailerData.key);
-    })();
-  }, [movieId, lang]);
-
+export default function TrailerModal({ videoUrl, isOpen, onCloseModal }) {
   return (
     <ReactModal
       isOpen={isOpen}

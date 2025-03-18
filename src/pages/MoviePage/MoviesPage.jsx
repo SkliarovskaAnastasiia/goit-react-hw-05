@@ -1,10 +1,10 @@
 import { AiOutlineInfoCircle } from 'react-icons/ai';
-import { use, useEffect, useMemo, useRef, useState } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 import MovieList from '../../components/MovieList/MovieList';
 import {
   getMovieByName,
+  getMoviesByCategory,
   getMoviesByGenres,
-  getTopRatedMovies,
 } from '../../utils/tmdb-api';
 import { useSearchParams } from 'react-router-dom';
 import { LangContext } from '../../components/langContext';
@@ -12,19 +12,24 @@ import { t } from 'i18next';
 import toast from 'react-hot-toast';
 import SearchByNameForm from '../../components/SearchByNameForm/SearchByNameForm';
 import SearchByGenresForm from '../../components/SearchByGenresForm/SearchByGenresForm';
+import Loader from '../../components/Loader/Loader';
 import css from './MoviesPage.module.css';
+import MoviesCategoriesBtns from '../../components/MoviesCategoriesBtns/MoviesCategoriesBtns';
 
 export default function MoviesPage() {
   const { lang } = use(LangContext);
 
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [isLoading, setIsLoading] = useState(false);
 
   const query = searchParams.get('query') || '';
   const page = Number(searchParams.get('page')) || 1;
   const [totalPages, setTotalPages] = useState(0);
 
   const genres = searchParams.get('genres') || '';
+
+  const [category, setCategory] = useState('top_rated');
 
   const nextBtnRef = useRef();
   const prevBtnRef = useRef();
@@ -35,20 +40,9 @@ export default function MoviesPage() {
   }, []);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const { results, total_pages } = await getTopRatedMovies(page, lang);
-        setMovies(results);
-        setTotalPages(total_pages);
-      } catch {
-        toast.error('Something went wrong, try again', { duration: 3000 });
-      }
-    })();
-  }, [page, lang]);
-
-  useEffect(() => {
     if (query === '') return;
 
+    setIsLoading(true);
     (async () => {
       try {
         const { results, total_pages } = await getMovieByName(
@@ -60,21 +54,31 @@ export default function MoviesPage() {
         setTotalPages(total_pages);
       } catch {
         toast.error('Something went wrong, try again', { duration: 3000 });
+      } finally {
+        setIsLoading(false);
       }
     })();
   }, [query, page, lang]);
 
   useEffect(() => {
+    setIsLoading(true);
+
     (async () => {
       if (genres === '') {
         try {
-          const { results, total_pages } = await getTopRatedMovies(page, lang);
+          const { results, total_pages } = await getMoviesByCategory(
+            page,
+            lang,
+            category
+          );
           setMovies(results);
           setTotalPages(total_pages);
         } catch {
           toast.error('Something went wrong, try again', {
             duration: 3000,
           });
+        } finally {
+          setIsLoading(false);
         }
         return;
       }
@@ -87,14 +91,15 @@ export default function MoviesPage() {
         );
         setMovies(results);
         setTotalPages(total_pages);
-        console.log(results);
       } catch {
         toast.error('Something went wrong, try again', {
           duration: 3000,
         });
+      } finally {
+        setIsLoading(false);
       }
     })();
-  }, [lang, page, genres]);
+  }, [lang, page, genres, category]);
 
   useEffect(() => {
     window.scrollTo({
@@ -102,8 +107,6 @@ export default function MoviesPage() {
       behavior: 'smooth',
     });
   }, [movies]);
-
-  const memoizedMovies = useMemo(() => movies, [movies]);
 
   const updateSearchParams = (key, value) => {
     const updatedParams = new URLSearchParams(searchParams);
@@ -132,6 +135,11 @@ export default function MoviesPage() {
     setSearchParams({ genres: searchedGenres, page: 1 });
   };
 
+  const handleChangeCategory = selectedCategory => {
+    setCategory(selectedCategory);
+    setSearchParams({ categoty: selectedCategory, page: 1 });
+  };
+
   const handleClickPrevBtn = () => {
     const prevPage = page - 1;
     updateSearchParams('page', prevPage);
@@ -150,9 +158,11 @@ export default function MoviesPage() {
     <>
       <SearchByNameForm onSubmit={handleQuerySubmit} />
       <SearchByGenresForm lang={lang} onSubmit={handleGenresSubmit} />
+      <MoviesCategoriesBtns active={category} onClick={handleChangeCategory} />
 
-      {movies.length > 0 && <MovieList movies={memoizedMovies} />}
-      {movies.length === 0 && (
+      {isLoading && <Loader />}
+      {movies.length > 0 && <MovieList movies={movies} />}
+      {movies.length === 0 && !isLoading && (
         <div className={css.textWrapper}>
           <p className={css.notFoundText}>{t('moviePage.notFound')}</p>
         </div>

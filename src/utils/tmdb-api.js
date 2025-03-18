@@ -20,8 +20,8 @@ export async function getMovieById(movieId, language) {
   return response.data;
 }
 
-export async function getTopRatedMovies(page, language) {
-  const response = await axios.get('movie/top_rated', {
+export async function getMoviesByCategory(page, language, category) {
+  const response = await axios.get(`movie/${category}`, {
     params: { page, language },
   });
   return response.data;

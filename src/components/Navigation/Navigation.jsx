@@ -11,12 +11,12 @@ function addLinksClasses({ isActive }) {
 
 export default function Navigation({ toggleMenu }) {
   const { lang, changeLang } = use(LangContext);
+  const { t } = useTranslation();
 
   const handleLangChange = e => {
     changeLang(e.target.value);
   };
 
-  const { t } = useTranslation();
   return (
     <>
       <div className={css.navigation}>

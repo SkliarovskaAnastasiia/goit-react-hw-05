@@ -23,6 +23,11 @@ const resources = {
         notFound: 'Sorry, nothing found',
         formPlaceholder: 'Search...',
         selectPlaceholder: 'All genres',
+        category: {
+          popular: 'Popular',
+          top_rated: 'Top Rated',
+          now_playing: 'Now Playing',
+        },
       },
 
       randomPage: {
@@ -75,6 +80,11 @@ const resources = {
         notFound: 'Нічого не знайдено',
         formPlaceholder: 'Пошук...',
         selectPlaceholder: 'Усі жанри',
+        category: {
+          popular: 'Популярні',
+          top_rated: 'Рейтингові',
+          now_playing: 'Зараз у кіно',
+        },
       },
 
       randomPage: {
@@ -98,7 +108,7 @@ const resources = {
         trailer: 'Подивитися трейлер',
       },
 
-      reviews: { noReviews: 'До цього філму ще немає жодної рецензії' },
+      reviews: { noReviews: 'До цього фільму ще немає жодної рецензії' },
 
       cast: { noCast: 'Немає жодної інформації про акторський склад' },
 

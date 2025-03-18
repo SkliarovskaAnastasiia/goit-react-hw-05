@@ -1,0 +1,48 @@
+.movieInfo {
+  height: 400px;
+  padding: 48px;
+  margin-bottom: 32px;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.movieTitle {
+  font-size: 38px;
+  color: #fafafa;
+  text-align: center;
+}
+
+.movieDate {
+  font-size: 22px;
+  color: #fafafab6;
+  line-height: 1;
+  margin-bottom: 38px;
+  text-align: center;
+}
+
+.seeMoreLink {
+  display: block;
+  background-color: #00000074;
+  width: fit-content;
+  margin: 0 auto;
+  line-height: 1.15;
+  border: 1px solid #747bff;
+  border-radius: 8px;
+  padding: 12px;
+  color: #747bff;
+  transition: transform 0.25s ease-in;
+}
+
+@media screen and (min-width: 700px) {
+  .seeMoreLink:hover,
+  .seeMoreLink:focus {
+    transform: scale(1.02);
+  }
+
+  .movieInfo {
+    height: 500px;
+  }
+}

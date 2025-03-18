@@ -2,7 +2,9 @@ import { IoPlay } from 'react-icons/io5';
 import { formatDateToYear } from '../../helpers/formatDateToYear';
 import { formatRuntime } from '../../helpers/formatRuntime';
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
+import { LangContext } from '../langContext';
+import { use, useState, useEffect } from 'react';
+import { getMovieTrailer } from '../../utils/tmdb-api';
 import noPosterHolder from '../../assets/noPosterHolder.jpg';
 import TrailerModal from '../TrailerModal/TrailerModal';
 import css from './MovieDetails.module.css';
@@ -20,14 +22,32 @@ export default function MovieDetails({
     tagline,
     overview,
   },
-  lang,
 }) {
   const imgUrl = 'https://image.tmdb.org/t/p/w500/';
+  const { lang } = use(LangContext);
   const { t } = useTranslation();
+
+  const [trailerKey, setTrailerKey] = useState();
+  const videoUrl = `https://www.youtube-nocookie.com/embed/${trailerKey}`;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleToggleModal = () => setIsModalOpen(!isModalOpen);
+
+  useEffect(() => {
+    if (!id) return;
+
+    (async () => {
+      const { results } = await getMovieTrailer(id, lang);
+      let trailerData = results.find(result => result.type === 'Trailer');
+
+      if (!trailerData && lang === 'uk-UA') {
+        const { results } = await getMovieTrailer(id, 'en-US');
+        trailerData = results.find(result => result.type === 'Trailer');
+      }
+      setTrailerKey(trailerData?.key);
+    })();
+  }, [id, lang]);
 
   return (
     <>
@@ -78,17 +98,18 @@ export default function MovieDetails({
             <p className={css.movieOverview}>{overview}</p>
           </div>
 
-          <button
-            type="button"
-            className={css.trailerBtn}
-            onClick={handleToggleModal}
-          >
-            <IoPlay size={20} /> <p>{t('movieDetails.trailer')}</p>
-          </button>
+          {trailerKey && (
+            <button
+              type="button"
+              className={css.trailerBtn}
+              onClick={handleToggleModal}
+            >
+              <IoPlay size={20} /> <p>{t('movieDetails.trailer')}</p>
+            </button>
+          )}
 
           <TrailerModal
-            movieId={id}
-            lang={lang}
+            videoUrl={videoUrl}
             isOpen={isModalOpen}
             onCloseModal={handleToggleModal}
           />

@@ -58,11 +58,19 @@ export default function SearchByGenresForm({ lang, onSubmit }) {
               components={animatedComponents}
               className={css.selectField}
               styles={{
-                control: (provided, state) => ({
+                control: provided => ({
                   ...provided,
                   backgroundColor: 'transparent',
                   borderColor: 'transparent',
-                  outline: state.isSelected && 'none',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                  outline: 'none !important',
+                  '&:hover': {
+                    borderColor: 'transparent',
+                  },
+                  '&:focus-within': {
+                    boxShadow: 'none !important',
+                  },
                 }),
               }}
             />
