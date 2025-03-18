@@ -61,3 +61,17 @@ export async function getMovieTrailer(movieId, language) {
   });
   return response.data;
 }
+
+export async function getGenresList(language) {
+  const response = await axios.get('genre/movie/list', {
+    params: { language },
+  });
+  return response.data;
+}
+
+export async function getMoviesByGenres(language, genres, page) {
+  const response = await axios.get('discover/movie', {
+    params: { language, with_genres: genres, page },
+  });
+  return response.data;
+}

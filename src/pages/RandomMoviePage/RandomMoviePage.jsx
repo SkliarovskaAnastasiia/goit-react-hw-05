@@ -1,19 +1,23 @@
 import { useTranslation } from 'react-i18next';
 import { getPopularMovies } from '../../utils/tmdb-api';
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { formatDateToYear } from '../../helpers/formatDateToYear';
 import { Link, useLocation } from 'react-router-dom';
+import { LangContext } from '../../components/langContext';
 import css from './RandomMoviePage.module.css';
 
 const getRandomPageNum = () => {
   return Math.floor(Math.random() * 50 + 1);
 };
 
-export default function RandomMoviePage({ lang }) {
+export default function RandomMoviePage() {
+  const { lang } = use(LangContext);
   const { t } = useTranslation();
+
   const imgUrl = 'https://image.tmdb.org/t/p/w500/';
   const location = useLocation();
   const [movie, setMovie] = useState(null);
+
   useEffect(() => {
     document.title = 'FilmFinder | Random Movie';
     return () => (document.title = 'FilmFinder');

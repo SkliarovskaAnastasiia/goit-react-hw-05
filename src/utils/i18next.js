@@ -21,6 +21,8 @@ const resources = {
 
       moviePage: {
         notFound: 'Sorry, nothing found',
+        formPlaceholder: 'Search...',
+        selectPlaceholder: 'All genres',
       },
 
       randomPage: {
@@ -47,6 +49,8 @@ const resources = {
       reviews: { noReviews: "We don't have any reviews for this movie" },
 
       cast: { noCast: "We don't have any information about cast" },
+
+      notFound: 'Page not found',
     },
   },
 
@@ -69,6 +73,8 @@ const resources = {
 
       moviePage: {
         notFound: 'Нічого не знайдено',
+        formPlaceholder: 'Пошук...',
+        selectPlaceholder: 'Усі жанри',
       },
 
       randomPage: {
@@ -95,6 +101,8 @@ const resources = {
       reviews: { noReviews: 'До цього філму ще немає жодної рецензії' },
 
       cast: { noCast: 'Немає жодної інформації про акторський склад' },
+
+      notFound: 'Сторінку не знайдено',
     },
   },
 };

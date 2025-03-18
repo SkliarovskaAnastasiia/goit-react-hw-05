@@ -1,5 +1,5 @@
 import { IoIosArrowRoundBack } from 'react-icons/io';
-import { Suspense, useEffect, useRef, useState } from 'react';
+import { Suspense, use, useEffect, useRef, useState } from 'react';
 import {
   Link,
   NavLink,
@@ -8,24 +8,26 @@ import {
   useParams,
 } from 'react-router-dom';
 import { getMovieById } from '../../utils/tmdb-api';
-import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
+import { LangContext } from '../../components/langContext';
 import Loader from '../../components/Loader/Loader';
 import MovieDetails from '../../components/MovieDetails/MovieDetails';
 import toast from 'react-hot-toast';
-import { useTranslation } from 'react-i18next';
+import clsx from 'clsx';
 import css from './MovieDetailsPage.module.css';
 
 function addClasses({ isActive }) {
   return clsx(css.itemLink, isActive && css.activeLink);
 }
 
-export default function MovieDetailsPage({ lang }) {
+export default function MovieDetailsPage() {
+  const { lang } = use(LangContext);
+  const { t } = useTranslation();
+
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState({});
   const location = useLocation();
   const backlink = useRef(location.state || '/movies');
-
-  const { t } = useTranslation();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });

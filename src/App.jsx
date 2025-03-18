@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
-import { useTranslation } from 'react-i18next';
 import AppBar from './components/AppBar/AppBar';
 import Footer from './components/Footer/Footer';
 import Loader from './components/Loader/Loader';
@@ -15,44 +14,26 @@ const RandomMoviePage = lazy(() =>
 const MovieDetailsPage = lazy(() =>
   import('./pages/MovieDetailsPage/MovieDetailsPage')
 );
-const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
 const MovieCast = lazy(() => import('./components/MovieCast/MovieCast'));
 const MovieReviews = lazy(() =>
   import('./components/MovieReviews/MovieReviews')
 );
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
 
 function App() {
-  const [lang, setLang] = useState(() => {
-    const langVal = localStorage.getItem('lang');
-    if (langVal !== null) return langVal;
-
-    return 'en-US';
-  });
-
-  const { i18n } = useTranslation();
-
-  const handleChangeLang = selectedLang => {
-    setLang(selectedLang);
-    i18n.changeLanguage(selectedLang);
-    localStorage.setItem('lang', selectedLang);
-  };
-
   return (
     <>
-      <AppBar value={lang} onChange={handleChangeLang} />
+      <AppBar />
 
       <main id="main">
         <Suspense fallback={<Loader />}>
           <Routes>
-            <Route path="/" element={<HomePage lang={lang} />} />
-            <Route path="/movies" element={<MoviesPage lang={lang} />} />
-            <Route path="/random" element={<RandomMoviePage lang={lang} />} />
-            <Route
-              path="/movies/:movieId"
-              element={<MovieDetailsPage lang={lang} />}
-            >
-              <Route path="cast" element={<MovieCast lang={lang} />} />
-              <Route path="reviews" element={<MovieReviews lang={lang} />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/movies" element={<MoviesPage />} />
+            <Route path="/random" element={<RandomMoviePage />} />
+            <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
+              <Route path="cast" element={<MovieCast />} />
+              <Route path="reviews" element={<MovieReviews />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

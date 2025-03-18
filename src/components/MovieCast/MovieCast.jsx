@@ -1,15 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import { getMovieCast } from '../../utils/tmdb-api';
 import { useParams } from 'react-router-dom';
-import MovieCastItem from '../MovieCastItem/MovieCastItem';
-import css from './MovieCast.module.css';
-import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
+import { LangContext } from '../langContext';
+import MovieCastItem from '../MovieCastItem/MovieCastItem';
+import toast from 'react-hot-toast';
+import css from './MovieCast.module.css';
 
-export default function MovieCast({ lang }) {
+export default function MovieCast() {
+  const { lang } = use(LangContext);
+  const { t } = useTranslation();
+
   const { movieId } = useParams();
   const [actors, setActors] = useState([]);
-  const { t } = useTranslation();
 
   useEffect(() => {
     (async () => {

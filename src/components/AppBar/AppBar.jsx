@@ -4,10 +4,10 @@ import { IoClose } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { useEffect, useState } from 'react';
-import css from './AppBar.module.css';
 import Navigation from '../Navigation/Navigation';
+import css from './AppBar.module.css';
 
-export default function AppBar({ value, onChange }) {
+export default function AppBar() {
   const isMobile = useMediaQuery({ maxWidth: 660 });
   const [isOpen, setIsOpen] = useState(false);
 
@@ -44,17 +44,13 @@ export default function AppBar({ value, onChange }) {
                 >
                   <IoClose size={24} />
                 </button>
-                <Navigation
-                  value={value}
-                  onChange={onChange}
-                  toggleMenu={toggleMenu}
-                />
+                <Navigation toggleMenu={toggleMenu} />
               </div>
             </div>
           )}
         </>
       ) : (
-        <Navigation value={value} onChange={onChange} toggleMenu={toggleMenu} />
+        <Navigation />
       )}
     </header>
   );

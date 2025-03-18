@@ -1,15 +1,22 @@
-import { IoSearchOutline } from 'react-icons/io5';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { use, useEffect, useMemo, useRef, useState } from 'react';
 import MovieList from '../../components/MovieList/MovieList';
-import { getMovieByName, getTopRatedMovies } from '../../utils/tmdb-api';
-import { Formik, Form, Field } from 'formik';
+import {
+  getMovieByName,
+  getMoviesByGenres,
+  getTopRatedMovies,
+} from '../../utils/tmdb-api';
 import { useSearchParams } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import css from './MoviesPage.module.css';
+import { LangContext } from '../../components/langContext';
 import { t } from 'i18next';
+import toast from 'react-hot-toast';
+import SearchByNameForm from '../../components/SearchByNameForm/SearchByNameForm';
+import SearchByGenresForm from '../../components/SearchByGenresForm/SearchByGenresForm';
+import css from './MoviesPage.module.css';
 
-export default function MoviesPage({ lang }) {
+export default function MoviesPage() {
+  const { lang } = use(LangContext);
+
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -17,7 +24,8 @@ export default function MoviesPage({ lang }) {
   const page = Number(searchParams.get('page')) || 1;
   const [totalPages, setTotalPages] = useState(0);
 
-  const inputRef = useRef();
+  const genres = searchParams.get('genres') || '';
+
   const nextBtnRef = useRef();
   const prevBtnRef = useRef();
 
@@ -57,6 +65,38 @@ export default function MoviesPage({ lang }) {
   }, [query, page, lang]);
 
   useEffect(() => {
+    (async () => {
+      if (genres === '') {
+        try {
+          const { results, total_pages } = await getTopRatedMovies(page, lang);
+          setMovies(results);
+          setTotalPages(total_pages);
+        } catch {
+          toast.error('Something went wrong, try again', {
+            duration: 3000,
+          });
+        }
+        return;
+      }
+
+      try {
+        const { results, total_pages } = await getMoviesByGenres(
+          lang,
+          genres,
+          page
+        );
+        setMovies(results);
+        setTotalPages(total_pages);
+        console.log(results);
+      } catch {
+        toast.error('Something went wrong, try again', {
+          duration: 3000,
+        });
+      }
+    })();
+  }, [lang, page, genres]);
+
+  useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
@@ -71,8 +111,7 @@ export default function MoviesPage({ lang }) {
     setSearchParams(updatedParams);
   };
 
-  const handleSubmit = values => {
-    const searchedQuery = values.query.trim();
+  const handleQuerySubmit = searchedQuery => {
     if (searchedQuery === '') {
       setMovies([]);
       setTotalPages(0);
@@ -87,8 +126,10 @@ export default function MoviesPage({ lang }) {
     }
 
     setSearchParams({ query: searchedQuery, page: 1 });
+  };
 
-    inputRef.current.blur();
+  const handleGenresSubmit = searchedGenres => {
+    setSearchParams({ genres: searchedGenres, page: 1 });
   };
 
   const handleClickPrevBtn = () => {
@@ -107,25 +148,9 @@ export default function MoviesPage({ lang }) {
 
   return (
     <>
-      <Formik
-        initialValues={{ query: '' }}
-        onSubmit={handleSubmit}
-        enableReinitialize
-      >
-        <Form className={css.form}>
-          <Field
-            className={css.formField}
-            type="text"
-            name="query"
-            autoComplete="off"
-            ref={inputRef}
-            placeholder="Search..."
-          />
-          <button className={css.formBtn} type="submit">
-            <IoSearchOutline size={24} />
-          </button>
-        </Form>
-      </Formik>
+      <SearchByNameForm onSubmit={handleQuerySubmit} />
+      <SearchByGenresForm lang={lang} onSubmit={handleGenresSubmit} />
+
       {movies.length > 0 && <MovieList movies={memoizedMovies} />}
       {movies.length === 0 && (
         <div className={css.textWrapper}>

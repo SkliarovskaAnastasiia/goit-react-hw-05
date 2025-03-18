@@ -1,0 +1,35 @@
+.selectForm {
+  width: 80%;
+  background-color: #f1f1f1;
+  margin: 0 auto;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+
+  transition: background-color 0.25s ease-in, border-color 0.25s ease-in;
+}
+
+.selectForm:focus-within {
+  background-color: #fafafa;
+  border-color: #747bff;
+}
+
+.selectForm .selectField {
+  flex-grow: 1;
+}
+
+.submitBtn {
+  background-color: transparent;
+  border: none;
+  outline: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 11px;
+  color: #2a2a2ab6;
+}
+
+.selectForm:focus-within .submitBtn {
+  color: #747bff;
+}

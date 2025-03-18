@@ -1,15 +1,18 @@
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMoviesReviews } from '../../utils/tmdb-api';
+import { useTranslation } from 'react-i18next';
+import { LangContext } from '../langContext';
 import MovieReviewItem from '../MovieReviewItem/MovieReviewItem';
 import toast from 'react-hot-toast';
 import css from './MovieReviews.module.css';
-import { useTranslation } from 'react-i18next';
 
-export default function MovieReviews({ lang }) {
+export default function MovieReviews() {
+  const { lang } = use(LangContext);
+  const { t } = useTranslation();
+
   const { movieId } = useParams();
   const [reviews, setReviews] = useState(null);
-  const { t } = useTranslation();
 
   useEffect(() => {
     (async () => {

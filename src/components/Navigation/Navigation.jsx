@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { LangContext } from '../langContext';
+import { use } from 'react';
 import clsx from 'clsx';
 import css from './Navigation.module.css';
 
@@ -7,9 +9,11 @@ function addLinksClasses({ isActive }) {
   return clsx(css.navLink, isActive && css.activeLink);
 }
 
-export default function Navigation({ value, onChange, toggleMenu }) {
+export default function Navigation({ toggleMenu }) {
+  const { lang, changeLang } = use(LangContext);
+
   const handleLangChange = e => {
-    onChange(e.target.value);
+    changeLang(e.target.value);
   };
 
   const { t } = useTranslation();
@@ -24,13 +28,13 @@ export default function Navigation({ value, onChange, toggleMenu }) {
           {t('navigation.movies')}
         </NavLink>
 
-        <NavLink to="/random" className={addLinksClasses}>
+        <NavLink to="/random" className={addLinksClasses} onClick={toggleMenu}>
           {t('navigation.random')}
         </NavLink>
       </div>
 
       <select
-        value={value}
+        value={lang}
         onChange={handleLangChange}
         className={css.langSelect}
       >
