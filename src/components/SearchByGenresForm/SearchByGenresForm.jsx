@@ -35,9 +35,12 @@ export default function SearchByGenresForm({ lang, onSubmit }) {
     [genres]
   );
 
-  const hanldeSubmit = values => {
+  const hanldeSubmit = (values, action) => {
     const selectedGenres = values.genres.map(genre => genre.value).join('|');
     onSubmit(selectedGenres);
+
+    document.activeElement.blur();
+    action.resetForm();
   };
 
   return (

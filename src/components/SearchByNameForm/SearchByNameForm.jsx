@@ -8,11 +8,12 @@ export default function SearchByNameForm({ onSubmit }) {
   const inputRef = useRef();
   const { t } = useTranslation();
 
-  const handleSubmit = values => {
+  const handleSubmit = (values, action) => {
     const query = values.query.trim();
     onSubmit(query);
 
-    inputRef.current.blur();
+    document.activeElement.blur();
+    action.resetForm();
   };
 
   return (
