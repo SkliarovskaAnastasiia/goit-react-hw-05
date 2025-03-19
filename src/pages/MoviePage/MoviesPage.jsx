@@ -24,9 +24,9 @@ export default function MoviesPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
 
-  const query = searchParams.get('query') || '';
-  const genres = searchParams.get('genres') || '';
-  const category = searchParams.get('category') || 'top_rated';
+  const query = searchParams.get('query') ?? '';
+  const genres = searchParams.get('genres') ?? '';
+  const category = searchParams.get('category') ?? 'top_rated';
   const page = Number(searchParams.get('page')) || 1;
 
   const nextBtnRef = useRef();
